@@ -28,12 +28,12 @@
         <form action="#" id="login">
           <div class="input-box">
             <span class="icon"><ion-icon name="person"></ion-icon></span>
-            <input type="text" required />
+            <input type="text" name="username" required />
             <label>Username</label>
           </div>
           <div class="input-box">
             <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-            <input type="password" required />
+            <input type="password" name="password" required />
             <label>Password</label>
           </div>
           <div class="remember-forgot">
@@ -64,7 +64,14 @@
           </div>
           <div class="input-box">
             <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-            <input type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?.*[A-Z]).{8,}" title="Must contain atleast one number and one uppercase and lowercase letter,and at least 8 or more characters" required />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              pattern="(?=.*\d)(?=.*[a-z])(?.*[A-Z]).{8,}"
+              title="Must contain atleast one number and one uppercase and lowercase letter,and at least 8 or more characters"
+              required
+            />
             <label>Password</label>
           </div>
           <div class="remember-forgot">
@@ -105,11 +112,11 @@
         }
         alert(`Your password strength is: ${strength}`);
       }
-    
-      let regForm = document.querySelector('#register-form');
-      regForm.addEventListener('submit', function(event) {
+
+      let regForm = document.querySelector("#register-form");
+      regForm.addEventListener("submit", function (event) {
         event.preventDefault();
-        let passwordInput = document.getElementById('password');
+        let passwordInput = document.getElementById("password");
         checkPasswordStrength(passwordInput.value);
       });
     </script>
@@ -143,13 +150,13 @@
     <script>
       let loginForm = document.querySelector("#login");
       loginForm.addEventListener("submit", handleLogin);
-    
+
       function handleLogin(event) {
         event.preventDefault();
         let formData = new FormData(loginForm);
         let data = Object.fromEntries(formData);
         let jsonData = JSON.stringify(data);
-    
+
         fetch("http://localhost:3000/login", {
           method: "POST",
           headers: {
@@ -160,16 +167,15 @@
           .then((res) => {
             if (res.ok) {
               console.log("Login Successful!!!");
-              
-              window.location.href = "dashboard.html"; 
+
+              window.location.href = "dashboard.html";
             } else {
               console.error("Error:", res.statusText);
-              alert("Invalid credentials"); 
+              alert("Invalid credentials");
             }
           })
           .catch((err) => console.error(err));
       }
     </script>
-    
   </body>
 </html>
